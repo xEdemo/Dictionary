@@ -5,13 +5,14 @@
 	"main": "src/app.js",
 	"scripts": {
 		"start": "node src/app.js",
-		"test": "node src/registerCommands.js"
+		"run": "node src/registerCommands.js"
 	},
 	"author": "Roonie & Bunk",
 	"license": "ISC",
 	"dependencies": {
 		"discord.js": "^14.15.2",
-		"dotenv": "^16.4.5"
+		"dotenv": "^16.4.5",
+		"mongoose": "^8.4.0"
 	},
 	"devDependencies": {
 		"nodemon": "^3.0.1"

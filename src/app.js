@@ -1,5 +1,7 @@
 require("dotenv").config();
 const { Client, IntentsBitField } = require("discord.js");
+const mongoose = require('mongoose');
+const eventHandler = require("./handlers/eventHandler");
 
 const client = new Client({
 	intents: [
@@ -10,24 +12,18 @@ const client = new Client({
 	],
 });
 
-client.on("ready", (c) => {
-	console.log(`✔ ${c.user.tag} is online.`);
-});
+(async () => {
+	try {
+		mongoose.set('strictQuery', false);
+		await mongoose.connect(process.env.MONGO_URI);
+		console.log("Connected to Mongo");
 
-client.on("messageCreate", (message) => {
-	if (message.author.bot) {
-		return;
-	};
+		eventHandler(client);
+	} catch (err) {
+		console.log(`There was an error while attempting to connect to the DB: ${err}`);
+	}
+})();
 
-	if (message.content === "roonie") {
-		message.reply("Fuck off");
-	};
-});
-
-client.on("interactionCreate", (interaction) => {
-	if (!interaction.isChatInputCommand()) return;
-
-	console.log(interaction.commandName);
-});
+//eventHandler(client);
 
 client.login(process.env.TOKEN);
