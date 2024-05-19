@@ -1,7 +1,7 @@
 require("dotenv").config();
-const areCommandsDifferent = require("../../utils/areCommandsDifferent");
-const getApplcationCommands = require("../../utils/getApplcationCommands");
-const getLocalCommands = require("../../utils/getLocalCommands");
+const areCommandsDifferent = require("../../utils/areCommandsDifferent.js");
+const getApplcationCommands = require("../../utils/getApplcationCommands.js");
+const getLocalCommands = require("../../utils/getLocalCommands.js");
 
 module.exports = async (client) => {
 	try {

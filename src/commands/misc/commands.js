@@ -1,12 +1,29 @@
+const getLocalCommands = require("../../utils/getLocalCommands.js");
+
 module.exports = {
 	// deleted: true,
 	name: "commands",
-	description: "List of useful bot commands.",
+	description: "List of all bot commands.",
 	// devOnly: true,
 	// testOnly: true,
 	// options: Object[],
 
 	callback: (client, interaction) => {
-		interaction.reply("**COMMANDS:**\n- /report (Reports a user for an infraction)\n- /word_list (Gives a full list of banned words)\n- /add_word (Adds a word to the dictionary)\n /remove_word (Removes a word from the dictionary)\n- /lookup (Sees if a user has any infractions to their name)");
+		let str = "**Commands:**\n\n";
+		let localCommands = getLocalCommands();
+
+		localCommands = localCommands.sort((a, b) => a.name.localeCompare(b.name));
+
+		for (const localCommand of localCommands) {
+			const { name, description, deleted } = localCommand;
+			if (!deleted) {
+				str += `Command: /${name}\nDescription: ${description}\n\n`
+			}
+		}
+
+		interaction.reply({
+            content: str,
+            ephemeral: true,
+        });
 	},
 };

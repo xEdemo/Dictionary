@@ -75,9 +75,10 @@ module.exports = {
 
 				infractionCount = userDB.infractions;
 
-				await interaction.editReply(
-					`Report submitted for ${user.user.globalName || user.user.username}. They were given an infraction for using the word '${word}.' They now have ${infractionCount} infractions.'`
-				);
+				await interaction.editReply({
+					content: `Report submitted for ${user.user.globalName || user.user.username}. They were given an infraction for using the word '${word}.' They now have ${infractionCount} infractions.'`,
+                    ephemeral: true
+				});
 			} else {
 				const newUser = new Infraction({
 					userId,
@@ -90,9 +91,10 @@ module.exports = {
 
 				infractionCount = 1;
 
-				await interaction.editReply(
-					`Report submitted for ${user.user.globalName || user.user.username}. They were given their first infraction for using the word '${word}.'`
-				);
+				await interaction.editReply({
+					content: `Report submitted for ${user.user.globalName || user.user.username}. They were given their first infraction for using the word '${word}.'`,
+					ephemeral: true
+				});
 			}
 
 			// Send a message to the infraction channel
