@@ -9,6 +9,7 @@ const client = new Client({
 		IntentsBitField.Flags.GuildMembers,
 		IntentsBitField.Flags.GuildMessages,
 		IntentsBitField.Flags.MessageContent,
+		IntentsBitField.Flags.GuildVoiceStates,
 	],
 });
 
@@ -19,11 +20,9 @@ const client = new Client({
 		console.log("Connected to Mongo");
 
 		eventHandler(client);
+
+		client.login(process.env.TOKEN);
 	} catch (err) {
 		console.log(`There was an error while attempting to connect to the DB: ${err}`);
 	}
 })();
-
-//eventHandler(client);
-
-client.login(process.env.TOKEN);
